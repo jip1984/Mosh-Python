@@ -4,27 +4,23 @@ import random
 emojis = {'r': '🪨', 's': '✂️', 'p': '📃'}
 choices = ('r', 'p', 's')
 
-while True:
-
-    # Ask the user to choose rock, paper or scissors
-    user_choice = input('Welcome, ROCK, PAPER or SCISSORS? (r/p/s): ').lower()
-
-    # If choice is not valid
-    #    print an error
-    # if user_choice != 'r' and user_choice != 'p' and user_choice != 's':
-    #     print('Invalid choice')
-    if user_choice not in choices:
-        print('Invalid choice')
-        continue
-    # computers choice
-    computer_choice = random.choice(choices)
+  # Ask the user to choose rock, paper or scissors
+def get_user_choice():
+    choices = ['r', 'p', 's']  # Valid choices: 'r' for Rock, 'p' for Paper, 's' for Scissors
+    while True:
+        user_choice = input('Welcome, Rock, Paper, or Scissors? (r/p/s): ').lower()
+        if user_choice in choices:
+            return user_choice  # Return valid choice
+        else:
+            print('Invalid choice, please choose r, p, or s.')
 
 
-    #print choices (emojis)
+def display_choices(user_choice, computer_choice):
     print(f'You chose: {emojis[user_choice]}')
     print(f'Computer chose: {emojis[computer_choice]}')
 
-    #determine winner
+
+def determine_winner(user_choice, computer_choice):
     if user_choice == computer_choice:
         print('Its a draw')
     elif ( 
@@ -34,8 +30,23 @@ while True:
         print('You win!!!')
     else:
         print('You lose') 
-    # want to continue
-    should_continue = input('Want to continue? (y/n): ').lower()
-    #if not terminate
-    if should_continue == 'n':
-        break
+
+def play_game():
+    while True:
+        #users choice
+        user_choice = get_user_choice()
+        # computers choice
+        computer_choice = random.choice(choices)
+        #print choices (emojis)
+        display_choices(user_choice, computer_choice)
+        #determine winner
+        determine_winner(user_choice, computer_choice)
+        # want to continue
+    
+            # want to continue
+        should_continue = input('Want to continue? (y/n): ').lower()
+            #if not terminate
+        if should_continue == 'n':
+            break
+
+play_game()
